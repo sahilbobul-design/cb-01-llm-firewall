@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+  # ----------------------------------------------------------------------------
+  # PostgreSQL Database (Internal Network Only - Never Exposed Publicly)
+  # ----------------------------------------------------------------------------
+  db:
+    image: postgres:16-alpine
+    container_name: llm_security_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_secure_password_2026
+      POSTGRES_DB: llm_security
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - internal_network
+    # Notice: NO 'ports' key is mapped to host machine, guaranteeing that
+    # the PostgreSQL service is accessible strictly via internal container network.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d llm_security"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ----------------------------------------------------------------------------
+  # FastAPI REST API Backend
+  # ----------------------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: llm_security_backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres_secure_password_2026@db:5432/llm_security
+      - ENVIRONMENT=production
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - LINUX_SECURITY_ENABLED=true
+      - YARA_ENABLED=true
+      - CLAMAV_ENABLED=true
+      - TSHARK_ENABLED=false
+      - NETWORK_MONITOR_ENABLED=false
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    volumes:
+      # Mount dataset and rules directories
+      - ./dataset:/app/dataset
+      - ./rules:/app/rules
+    ports:
+      - "${HOST_PORT:-8001}:8000"
+    networks:
+      - internal_network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  internal_network:
+    driver: bridge

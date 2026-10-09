@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#07090e] text-slate-100 font-sans antialiased;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(14, 28, 54, 0.55) 0%, transparent 60%),
+      radial-gradient(circle at 80% 80%, rgba(79, 70, 229, 0.1) 0%, transparent 40%),
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+  }
+}
+
+/* Custom Cyber Glows & Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(7, 9, 14, 0.85);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 242, 254, 0.5);
+}
+
+.glass-panel {
+  background: rgba(14, 19, 32, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-glow {
+  background: rgba(14, 19, 32, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 242, 254, 0.35);
+  box-shadow: 0 0 30px rgba(0, 242, 254, 0.18);
+}
+
+/* 3D Transform Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Cyber Scanning Laser Line */
+@keyframes scanLaser {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-scan-laser {
+  animation: scanLaser 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Radar Sweep */
+@keyframes radarSweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-radar-sweep {
+  animation: radarSweep 6s linear infinite;
+}
+
+/* Cyber 3D Float */
+@keyframes float3D {
+  0%, 100% {
+    transform: translateY(0px) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotateX(2deg) rotateY(-2deg);
+  }
+}
+
+.animate-float-3d {
+  animation: float3D 5s ease-in-out infinite;
+}

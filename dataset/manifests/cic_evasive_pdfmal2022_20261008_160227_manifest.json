@@ -1,0 +1,13 @@
+{
+  "dataset": "CIC_EVASIVE_PDFMAL2022",
+  "timestamp": "2026-10-08T16:02:27.309361+00:00",
+  "raw_source_path": "C:\\Users\\sahil\\OneDrive\\bio os foundation\\llm jailbreak part 2\\dataset\\raw\\pdf_malware",
+  "summary": {
+    "dataset": "CIC_EVASIVE_PDFMAL2022",
+    "total_found": 2,
+    "imported": 0,
+    "duplicates": 2,
+    "invalid": 0
+  },
+  "status": "COMPLETED"
+}

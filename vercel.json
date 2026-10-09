@@ -1,0 +1,11 @@
+{
+  "buildCommand": "cd sentinel-frontend && npm install && npm run build",
+  "outputDirectory": "sentinel-frontend/dist",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

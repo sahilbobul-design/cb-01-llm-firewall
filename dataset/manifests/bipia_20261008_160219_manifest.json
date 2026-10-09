@@ -1,0 +1,13 @@
+{
+  "dataset": "BIPIA",
+  "timestamp": "2026-10-08T16:02:19.269699+00:00",
+  "raw_source_path": "C:\\Users\\sahil\\OneDrive\\bio os foundation\\llm jailbreak part 2\\dataset\\raw",
+  "summary": {
+    "dataset": "BIPIA",
+    "total_found": 7,
+    "imported": 7,
+    "duplicates": 0,
+    "invalid": 0
+  },
+  "status": "COMPLETED"
+}
